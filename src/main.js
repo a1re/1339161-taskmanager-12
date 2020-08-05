@@ -9,7 +9,7 @@ import {makeControlTemplate} from "./view/control.js";
 import {makeFiltersTemplate} from "./view/filters.js";
 import {makeBoardTemplate} from "./view/board.js";
 import {makeSortingTemplate} from "./view/sorting.js";
-import {makeNewTaskTemplate} from "./view/new-task.js";
+import {makeTaskEditTemplate} from "./view/task-edit.js";
 import {makeLoadMoreButtonTemplate} from "./view/load-more-button.js";
 import {makeCardTemplate} from "./view/card.js";
 import {generateTask} from "./mock/task.js";
@@ -28,7 +28,7 @@ const siteBoardBlock = siteMainBlock.querySelector(`.board`);
 render(siteBoardBlock, makeSortingTemplate(), `afterbegin`);
 
 const siteTasksListBlock = siteMainBlock.querySelector(`.board__tasks`);
-render(siteTasksListBlock, makeNewTaskTemplate(tasks[0]), `beforeend`);
+render(siteTasksListBlock, makeTaskEditTemplate(tasks[0]), `beforeend`);
 
 for (let i = 1; i < Math.min(tasks.length, TASKS_AMOUNT_PER_TIER); i++) {
   render(siteTasksListBlock, makeCardTemplate(tasks[i]), `beforeend`);

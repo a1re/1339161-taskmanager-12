@@ -66,7 +66,7 @@ const makeTaskEditRepeatingTemplate = (repeating) => {
   return template;
 };
 
-export const makeNewTaskTemplate = (task = {}) => {
+export const makeTaskEditTemplate = (task = {}) => {
   const {
     color = `black`,
     description = ``,
