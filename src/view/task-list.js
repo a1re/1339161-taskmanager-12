@@ -1,12 +1,12 @@
 import {createElement} from "../utils.js";
 
-export default class LoadMoreButton {
+export default class TaskList {
   constructor() {
     this._element = null;
   }
 
   get template() {
-    return `<section class="board container"></section>`;
+    return `<div class="board__tasks"></div>`;
   }
 
   get element() {
