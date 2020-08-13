@@ -114,7 +114,7 @@ export default class TaskEdit {
                       class="card__text"
                       placeholder="Start typing your text here..."
                       name="text"
-                    >${description}.</textarea>
+                    >${description}</textarea>
                   </label>
                 </div>
 
