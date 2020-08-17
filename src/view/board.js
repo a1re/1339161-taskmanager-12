@@ -1,23 +1,7 @@
-import {createElement} from "../utils.js";
+import AbstractView from "./abstract.js";
 
-export default class LoadMoreButton {
-  constructor() {
-    this._element = null;
-  }
-
+export default class Board extends AbstractView {
   get template() {
     return `<section class="board container"></section>`;
-  }
-
-  get element() {
-    if (!this._element) {
-      this._element = createElement(this.template);
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
