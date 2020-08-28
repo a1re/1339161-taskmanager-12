@@ -7,6 +7,8 @@ export default class Task extends AbstractView {
     this._task = task;
 
     this._editClickHandler = this._editClickHandler.bind(this);
+    this._favoriteClickHandler = this._favoriteClickHandler.bind(this);
+    this._archiveClickHandler = this._archiveClickHandler.bind(this);
   }
 
   get template() {
@@ -61,8 +63,28 @@ export default class Task extends AbstractView {
     this._callback.editClick();
   }
 
+  _favoriteClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.favoriteClick();
+  }
+
+  _archiveClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.archiveClick();
+  }
+
   set editClickHandler(callback) {
     this._callback.editClick = callback;
     this.element.querySelector(`.card__btn--edit`).addEventListener(`click`, this._editClickHandler);
+  }
+
+  set favoriteClickHandler(callback) {
+    this._callback.favoriteClick = callback;
+    this.element.querySelector(`.card__btn--favorites`).addEventListener(`click`, this._favoriteClickHandler);
+  }
+
+  set archiveClickHandler(callback) {
+    this._callback.archiveClick = callback;
+    this.element.querySelector(`.card__btn--archive`).addEventListener(`click`, this._archiveClickHandler);
   }
 }

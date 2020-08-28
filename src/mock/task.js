@@ -1,6 +1,8 @@
 import {COLORS} from "../const.js";
 import {getRandomInt} from "../utils/common.js";
 
+const generateId = () => Date.now() * parseInt(Math.random() * 10000, 10);
+
 const generateDescription = () => {
   const descriptions = [
     `Изучить теорию`,
@@ -64,6 +66,7 @@ const getRandomColor = () => {
 export const generateTask = () => {
   const dueDate = generateDate();
   return {
+    id: generateId(),
     description: generateDescription(),
     dueDate,
     repeating: generateRepeating(dueDate === null),
