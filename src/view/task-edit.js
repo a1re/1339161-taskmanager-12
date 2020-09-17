@@ -1,3 +1,4 @@
+import he from "he";
 import SmartView from "./smart.js";
 import {COLORS} from "../const.js";
 import {isTaskRepeating, formatTaskDueDate} from "../utils/task.js";
@@ -10,13 +11,13 @@ const BLANK_TASK = {
   description: ``,
   dueDate: null,
   repeating: {
-    mon: false,
-    tue: false,
-    wed: false,
-    thu: false,
-    fri: false,
-    sat: false,
-    sun: false,
+    mo: false,
+    tu: false,
+    we: false,
+    th: false,
+    fr: false,
+    sa: false,
+    su: false,
   },
   isArchive: false,
   isFavorite: false
@@ -135,7 +136,7 @@ export default class TaskEdit extends SmartView {
                       class="card__text"
                       placeholder="Start typing your text here..."
                       name="text"
-                    >${description}</textarea>
+                    >${he.encode(description)}</textarea>
                   </label>
                 </div>
 
