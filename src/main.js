@@ -1,29 +1,26 @@
-const TASKS_AMOUNT = 22;
-
 import SiteMenuView from "./view/site-menu.js";
 import StatisticsView from "./view/statistics.js";
-import {generateTask} from "./mock/task.js";
 import BoardPresenter from "./presenter/board.js";
 import FilterPresenter from "./presenter/filters.js";
 import TasksModel from "./model/tasks.js";
 import FiltersModel from "./model/filters.js";
 import {render, RenderPosition, remove} from "./utils/render.js";
 import {MenuItem, UpdateType, FilterType} from "./const.js";
+import Api from "./api.js";
 
-const tasks = new Array(TASKS_AMOUNT).fill().map(generateTask);
-
-const tasksModel = new TasksModel();
-tasksModel.tasks = tasks;
-
-const filtersModel = new FiltersModel();
+const AUTHORIZATION = `Basic jP2sd7vfBncl9sa8a`;
+const END_POINT = `https://12.ecmascript.pages.academy/task-manager`;
 
 const siteMainBlock = document.querySelector(`.main`);
 const siteHeaderBlock = siteMainBlock.querySelector(`.main__control`);
+
+const api = new Api(END_POINT, AUTHORIZATION);
+
+const tasksModel = new TasksModel();
+const filtersModel = new FiltersModel();
+
 const siteMenuComponent = new SiteMenuView();
-
-render(siteHeaderBlock, siteMenuComponent, RenderPosition.BEFOREEND);
-
-const boardPresenter = new BoardPresenter(siteMainBlock, tasksModel, filtersModel);
+const boardPresenter = new BoardPresenter(siteMainBlock, tasksModel, filtersModel, api);
 const filterPresenter = new FilterPresenter(siteMainBlock, tasksModel, filtersModel);
 
 const handleTaskNewFormClose = () => {
@@ -54,9 +51,18 @@ const handleSiteMenuClick = (menuItem) => {
   }
 };
 
-siteMenuComponent.menuClickHandler = handleSiteMenuClick;
-
 filterPresenter.init();
 boardPresenter.init();
 
+api.getTasks()
+  .then((tasks) => {
+    tasksModel.setTasks(UpdateType.INIT, tasks);
+    render(siteHeaderBlock, siteMenuComponent, RenderPosition.BEFOREEND);
+    siteMenuComponent.menuClickHandler = handleSiteMenuClick;
+  })
+  .catch(() => {
+    tasksModel.setTasks(UpdateType.INIT, []);
+    render(siteHeaderBlock, siteMenuComponent, RenderPosition.BEFOREEND);
+    siteMenuComponent.menuClickHandler = handleSiteMenuClick;
+  });
 
