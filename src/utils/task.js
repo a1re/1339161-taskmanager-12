@@ -35,8 +35,6 @@ export const isDatesEqual = (dateA, dateB) => {
   return moment(dateA).isSame(dateB, `day`);
 };
 
-export const generateId = () => Date.now() + parseInt(Math.randon() * 10000, 10);
-
 export const isTaskRepeating = (repeating) => {
   return Object.values(repeating).some(Boolean);
 };
